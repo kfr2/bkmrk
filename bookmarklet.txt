@@ -1,0 +1,1 @@
+javascript:(function(){ window.open('http://playground.triageworks.net/bkmrk/bkmrk.php?post&uri='+encodeURIComponent(window.location.href)+'&title='+encodeURIComponent(document.title)+'&desc='+encodeURIComponent(''+(window.getSelection?window.getSelection():document.getSelection?document.getSelection():document.selection.createRange().text)), '_blank', 'height=400,width=500')})()

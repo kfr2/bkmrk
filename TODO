@@ -1,0 +1,10 @@
+Have the bookmarklet post window close when the post has been submitted.
+
+Figure out a better way to doing template class. It's horribly inefficient and messy.
+
+Figure out some way to export data through microdata, etc, so perhaps a small social network could be built around or data could be imported into a pre-existing service (Quora, etc).
+
+Have bkmrk.php act as server logic and create dynamic/ajax-y pages using jQuery, etc.
+	* Perhaps have bkmrk.php act as an API of sorts and create various interfaces on top of it.
+
+Implement tag clouds/list of most popular tags.
