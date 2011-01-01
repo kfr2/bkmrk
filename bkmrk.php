@@ -293,33 +293,34 @@ class Post {
 			
 			// if given tags, limit to posts that have the tags
 			if($tags != ""){
-				$sql2 = "SELECT postid FROM tags WHERE ";
+				$sql2 = "SELECT DISTINCT postid FROM tags WHERE ";
 				for($i = 0; $i < count($tags); $i++){
 					if($i == 0){ $sql2 .= "tag='" . $tags[$i] . "' "; }
-					else{ $sql2 .= "INTERSECT SELECT postid FROM tags WHERE tag='" . $tags[$i] . "' "; }
+					else{ $sql2 .= "INTERSECT SELECT DISTINCT postid FROM tags WHERE tag='" . $tags[$i] . "' "; }
 				}
 				
 				// number of results our query will return
 				$count_sql2 = "SELECT COUNT(DISTINCT postid) FROM tags WHERE postid IN (" . $sql2 . ")";
 				$count = $base->querySingle($count_sql2);
 				
-				// warn the user if no results are found for those tags
+				// warn the user if no results are found for the requested tag(s)
 				if($count == 0){ die("No results exist for that tag intersection."); }
 				
 				// get the ids to limit the overall query to
 				$post_ids = $base->query($sql2);
 				
 				$sql .= "WHERE ";
-				$i = 0;
+				$i = 1;
 				
 				while($row = $post_ids->fetchArray(SQLITE3_ASSOC)){
 					$sql .= "id = " . $row['postid'] . " ";
-					if($i++ != $count - 1){ $sql .="OR "; }
+					if($i != $count){ $sql .= "OR "; }
+					
+					$i++;
 				}
 			}
 	
 			$sql .= "ORDER BY ts DESC LIMIT $num";
-			
 		
 			$ids = $base->query($sql);
 
