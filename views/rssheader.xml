@@ -1,10 +1,11 @@
 <?xml version="1.0" ?>
+<?xml-stylesheet type="text/css" href="style/rss.css"?>
 <rss version="2.0">
   <channel>
     <title>Latest Bkmrks</title>
     <link>https://github.com/kfredrichardson/bkmrk</link>
     <description>A user's latest collection of bkmrks...</description>
     <image>
-        <url></url> 
+        <url>https://github.com/kfredrichardson/bkmrk/raw/master/images/apple-logo.png</url> 
         <link>https://github.com/kfredrichardson/bkmrk</link> 
     </image>

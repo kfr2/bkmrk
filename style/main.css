@@ -55,4 +55,11 @@ input:focus, textarea:focus{
 	background-color: #CED3F0;
 }
 
+input:hover{
+	border: 1px solid orange;
+}
+
+#numbox{ 
+	width: 50px;
+}
 

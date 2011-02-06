@@ -4,6 +4,7 @@
 * Have bkmrk.php act as server logic and create dynamic/ajax-y pages using jQuery, etc.
 	* Perhaps have bkmrk.php act as an API of sorts and create various interfaces on top of it.
 * Implement tag clouds/list of most popular tags.
+	* ?cloud
 * Post to Twitter/Facebook/etc modules.
 	* look into http://rsscloud.org/ perhaps
 	* https://code.google.com/p/pubsubhubbub/

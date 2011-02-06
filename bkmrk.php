@@ -3,28 +3,12 @@
 /*
  * bkmrk.php:		A quick & personal web bookmarks system akin to del.icio.us.
  * author:			Kevin Richardson <kevin@triageworks.net>
- * last update:		28-Dec-2010 
+ * last update:		5-Feb-2011 
  * Github repo:		https://github.com/kfredrichardson/bkmrk
  * 
  * --
- * [The MIT-Zero License]
- * 
- * Copyright (c) 2010 Kevin RIchardson <kevin@triageworks.net>
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * License:  [The MIT-Zero License]
+ * See LICENSE
  * --
  * 
  * [USAGE:  bkmrk.php?...]
@@ -32,7 +16,7 @@
  *		init				creates bkmrk tables in sqlite3 database $dbname. Disabled if $enable_init = false
  *
  *		import?file			del.icio.us xml bookmarks file, relative to bkmrk.php, to import.  see http://bit.ly/hUAAak
- *		export				exports delicious-like XMl file of bookmarks
+ *		export				exports delicious-like XML file of bookmarks
  *
  * 		get&				by default, returns $def_num most recent links
  *				num			max number of posts returned.  replaces $def_num
@@ -62,7 +46,7 @@ $enable_import = false;
 // number of posts to return if num is not specified in query.
 $def_num = 10;
 // date format, using php's date()
-$date_format = "d-M @  G i";
+$date_format = "d-M-y @  G i";
 // timezone setup (see http://us2.php.net/manual/en/timezones.php)
 date_default_timezone_set("US/Eastern");
 /** </SETTINGS>	**/
@@ -88,8 +72,22 @@ class Template {
 	}
 	
 	// adds header to Template
-	public function addHeader(){
-		if($this->type == "html"){ $temp = file_get_contents("views/htmlheader.htm"); }
+	public function addHeader($tags = "", $num = 10){
+		if($this->type == "html"){
+			$temp = file_get_contents("views/htmlheader.htm");
+         	$tag_string = "";
+
+            if($tags != ""){
+                foreach($tags as $tag){
+                    $tag_string .= $tag . ",";
+                }
+            }
+   
+            $tag_string = substr($tag_string, 0, strlen($tag_string) - 1);
+            $temp = str_replace("#TAGS#", $tag_string, $temp);
+
+			$temp = str_replace("#NUM#", $num, $temp);
+		}
 		elseif($this->type == "rss"){ $temp = file_get_contents("views/rssheader.xml") . "\n\r"; }
 		elseif($this->type == "xml"){ $temp = file_get_contents("views/xmlheader.xml") . "\n\r"; }
 		
@@ -348,8 +346,10 @@ if(isset($_GET['get'])){
 	if(isset($_GET['id'])){ $id = $_GET['id']; }
 	
 	if(isset($_GET['tags'])){
-		$tag_str = $_GET['tags'];
-		$tags = explode(",", $tag_str);
+		if($_GET['tags'] != ""){
+			$tag_str = $_GET['tags'];
+			$tags = explode(",", $tag_str);
+		}
 	}
 	
 	// return an rss feed if applicable
@@ -362,7 +362,7 @@ if(isset($_GET['get'])){
 		$printer = new Template();
 	}
 	
-	$printer->addHeader();
+	$printer->addHeader($tags, $num);
 	
 	// get the posts and add them
 	$posts = Post::getPost($id, $num, $tags);
@@ -372,7 +372,7 @@ if(isset($_GET['get'])){
 	
 	$printer->addFooter();
 	
-	if($printer->getType() == "rss"){ header("Content-type: application/rss+xml"); }
+	if($printer->getType() == "rss"){ header("Content-type: text/xml"); }
 	$printer->output();
 }
 

@@ -1,0 +1,68 @@
+:root:before {
+   content: ">>You should view this data file in an RSS reader.  For more information see http://blogspace.com/rss/readers or google for 'rss readers.'";
+}
+
+:root:after {
+	content: ">>Visit https://github.com/kfredrichardson/bkmrk for your own copy of Bkmrk.";
+}
+
+rss {
+    display: block;
+    margin: 10px;
+}
+
+channel {
+    display: block;
+    border: 1px solid #000;
+    overflow: auto;
+    background-color: #d6e3ef;
+    font: 12px verdana;
+}
+
+channel>title, channel>description {
+    display: block;
+    margin-left: 10px;
+    margin-top: 10px;
+    background-color: #d6e3ef;
+    font-weight: bold;
+}
+
+channel>title {
+    font-size: 2em;
+}
+
+channel>description {
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+item {
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-color: #f5f5f5;
+}
+
+item>title {
+    font-weight: bold;
+	display: block;
+}
+
+item>link {
+	font-size: 0.8em;
+	display: block;
+}
+
+item>description {
+	font-style: oblique;
+	display: block;
+}
+
+/* hidden elements */
+channel>link, channel>language, channel>copyright, 
+channel>generator, channel>lastBuildDate, channel>ttl, channel>docs, 
+item>guid, item>pubDate, channel>image{
+    display: none;
+}
