@@ -2,8 +2,8 @@
 
 /*
  * bkmrk.php:		A quick & personal web bookmarks system akin to del.icio.us.
- * author:			Kevin Richardson <kevin@triageworks.net>
- * last update:		15-May-2011 
+ * author:			Kevin Richardson <kevin@magically.us>
+ * last update:		26-Oct-2011 
  * Github repo:		https://github.com/kfredrichardson/bkmrk
  * 
  * --

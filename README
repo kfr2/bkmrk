@@ -1,6 +1,6 @@
 BKMRK
 ======
-AUTHOR:  		Kevin Richardson <kevin@triageworks.net>
+AUTHOR:  		Kevin Richardson <kevin@magically.us>
 GITHUB REPO:	https://github.com/kfredrichardson/bkmrk
 
 ABOUT
@@ -10,7 +10,7 @@ It's (currently) meant to be used as a personal tool, but could be used to share
 
 By design, username/passwords or other forms of security are not currently implemented.  However, one could make use of various forms of http authentication, etc if he or she desires rudimentary protection against malicious users.
 
-It's written in PHP and uses SQLite3.  My apologies if that bothers you.
+It's written in PHP and uses SQLite3 as a quick and easy datastore.
 
 LICENSED under the MIT-Zero that can be found in LICENSE.
 
